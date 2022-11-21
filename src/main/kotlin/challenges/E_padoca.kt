@@ -1,5 +1,5 @@
 package challenges
 
 fun main() {
-    
+
 }
