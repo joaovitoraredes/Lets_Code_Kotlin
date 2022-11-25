@@ -1,5 +1,7 @@
 package challenges
 
+import java.text.DecimalFormat
+
 private const val PAES = 1
 private const val SALGADOS = 2
 private const val DOCES = 3
@@ -35,14 +37,14 @@ const val valorPastel = 2.50
 const val valorEmpada = 1.50
 
 const val valorBrigadeiro = 1.00
-const val valorSonho = 2.00
+const val valorSonho = 1.50
 const val valorDoceDeLeite = 1.50
 
 const val valorGoiaba = 3.50
 const val valorLaranja = 4.00
 const val valorUva = 3.00
 
-const val valorExpresso = 3.50
+const val valorExpresso = 8.50
 const val valorCapuccino = 4.00
 const val valorLatte = 4.50
 
@@ -50,6 +52,30 @@ val paes: List<Pair<String,Double>> = listOf(
     Pair(produtoPaoFrances, valorPaoFrances), //index 0
     Pair(produtoPaoDeLeite, valorPaoDeLeite), //index 1
     Pair(produtoPaoDeMilho, valorPaoDeMilho), //index 2
+)
+
+val salgados: List<Pair<String,Double>> = listOf(
+    Pair(produtoCoxinha, valorCoxinha),
+    Pair(produtoPastel, valorPastel),
+    Pair(produtoEmpada, valorEmpada),
+)
+
+val doces: List<Pair<String,Double>> = listOf(
+    Pair(produtoBrigadeiro, valorBrigadeiro),
+    Pair(produtoSonho, valorSonho),
+    Pair(produtoDoceDeLeite, valorDoceDeLeite),
+)
+
+val sucos: List<Pair<String,Double>> = listOf(
+    Pair(produtoGoiaba, valorGoiaba),
+    Pair(produtoLaranja, valorLaranja),
+    Pair(produtoUva, valorUva),
+)
+
+val cafe: List<Pair<String,Double>> = listOf(
+    Pair(produtoExpresso, valorExpresso),
+    Pair(produtoCapuccino, valorCapuccino),
+    Pair(produtoLatte, valorLatte),
 )
 
 val comanda : MutableList<String> = mutableListOf()
@@ -101,6 +127,16 @@ val menuDeCafes = """
             "Latte...............R$ $valorLatte
             "0....................Voltar
             """.trimIndent()
+
+val superior = """
+        =====================Comanda E-padoca======================
+        ===========================================================
+        item.......Produto..........Qtd.......Valor...........Total
+        ===========================================================
+        """.trimIndent()
+
+val df = DecimalFormat("#,##0.00")
+
 fun main() {
 
     ePadoca()
@@ -114,10 +150,17 @@ fun main() {
             }
         }while(cancelarCompra != "S" && cancelarCompra != "N")
     } else{
+        println(superior)
+
         comanda.forEach{linhaItem ->
             println(linhaItem)
         }
-        println("Valor total: $valorTotal")
+
+        println(""" 
+        ===========================================================
+        Total ===========================================> R$ ${df.format(valorTotal)}
+        =====================VOLTE SEMPRE ^-^======================
+        """.trimIndent())
     }
 }
 
@@ -130,17 +173,17 @@ fun ePadoca(){
             PAES -> {
                 selecionaProduto(menuSelecionado = menuDePaes, produtos = paes)
             }
-            SALGADOS -> { println(menuDeSalgados)
-//                comanda.add(i,readln())
+            SALGADOS -> {
+                selecionaProduto(menuSelecionado = menuDeSalgados, produtos = salgados)
             }
-            DOCES -> { println(menuDeDoces)
-//                comanda.add(i,readln())
+            DOCES -> {
+                selecionaProduto(menuSelecionado = menuDeDoces, produtos = doces)
             }
-            SUCOS -> { println(menuDeSucos)
-//                comanda.add(i,readln())
+            SUCOS -> {
+                selecionaProduto(menuSelecionado = menuDeSucos, produtos = sucos)
             }
-            CAFES -> { println(menuDeCafes)
-//                comanda.add(i,readln())
+            CAFES -> {
+                selecionaProduto(menuSelecionado = menuDeCafes, produtos = cafe)
             }
         }
     }while (categoria != 0)
@@ -153,7 +196,7 @@ fun selecionaQuantidadeDoProdutoECalculoDoValor(
     val precoTotalItem = produto.second * quantidadeDoTipoDoPao
     val linhaItem = linhaComanda( produto = produto.first,  qtsProduto = quantidadeDoTipoDoPao, valorProduto = produto.second, precoTotalDoProduto = precoTotalItem)
 
-    comanda.add(linhaItem) 
+    comanda.add(linhaItem)
     valorTotal += precoTotalItem
 }
 
@@ -162,7 +205,7 @@ fun linhaComanda(
     qtsProduto:Int,
     valorProduto:Double,
     precoTotalDoProduto: Double
-): String = "${comanda.size.inc()}......$produto......$qtsProduto......R$$valorProduto......R$$precoTotalDoProduto"
+): String = "${comanda.size.inc()}.......$produto.........$qtsProduto.......R$${df.format(valorProduto)}...........R$${df.format(precoTotalDoProduto)}"
 
 fun selecionaProduto(
     menuSelecionado: String,
@@ -184,3 +227,4 @@ fun selecionaProduto(
 
     } while (selecaoDoTipoDoProduto != 0)
 }
+
