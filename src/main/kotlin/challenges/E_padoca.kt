@@ -32,21 +32,21 @@ const val valorPaoFrances = 0.60
 const val valorPaoDeLeite = 0.40
 const val valorPaoDeMilho = 0.50
 
-const val valorCoxinha = 2.00
-const val valorPastel = 2.50
+const val valorCoxinha = 2.50
+const val valorPastel = 3.00
 const val valorEmpada = 1.50
 
 const val valorBrigadeiro = 1.00
-const val valorSonho = 1.50
+const val valorSonho = 2.50
 const val valorDoceDeLeite = 1.50
 
 const val valorGoiaba = 3.50
 const val valorLaranja = 4.00
 const val valorUva = 3.00
 
-const val valorExpresso = 8.50
-const val valorCapuccino = 4.00
-const val valorLatte = 4.50
+const val valorExpresso = 5.00
+const val valorCapuccino = 6.50
+const val valorLatte = 5.50
 
 val paes: List<Pair<String,Double>> = listOf(
     Pair(produtoPaoFrances, valorPaoFrances), //index 0
@@ -94,45 +94,46 @@ val menu = """
 
 //Menus de cada categoria
 val menuDePaes = """
-            Pão Francês............R$ $valorPaoFrances
-            Pão de leite...........R$ $valorPaoDeLeite
-            Pão de milho...........R$ $valorPaoDeMilho
-            0.......................Voltar
+            1 - Pão Francês............R$ $valorPaoFrances
+            2 - Pão de leite...........R$ $valorPaoDeLeite
+            3 - Pão de milho...........R$ $valorPaoDeMilho
+            0 - Voltar
             """.trimIndent()
 
 val menuDeSalgados = """
-            Coxinha ..........R$ $valorCoxinha
-            Pastel............R$ $valorPastel
-            Empada............R$ $valorEmpada
-            0..................Voltar
+            1 - Coxinha ..........R$ $valorCoxinha
+            2 - Pastel............R$ $valorPastel
+            3 - Empada............R$ $valorEmpada
+            0 - Voltar
+
             """.trimIndent()
 
 val menuDeDoces = """
-            Brigadeiro...........R$ $valorBrigadeiro
-            Sonho................R$ $valorSonho
-            Doce de Leite........R$ $valorDoceDeLeite
-            0.....................Voltar
+            1 - Brigadeiro...........R$ $valorBrigadeiro
+            2 - Sonho................R$ $valorSonho
+            3 - Doce de Leite........R$ $valorDoceDeLeite
+            0 - Voltar
             """.trimIndent()
 
 val menuDeSucos = """
-            Goiaba............R$ $valorGoiaba
-            Laranja...........R$ $valorLaranja
-            Uva...............R$ $valorUva
-            0..................Voltar
+            1 - Goiaba............R$ $valorGoiaba
+            2 - Laranja...........R$ $valorLaranja
+            3 - Uva...............R$ $valorUva
+            0 - Voltar
             """.trimIndent()
 
 val menuDeCafes = """
-            "Expresso............R$ $valorExpresso
-            "Capuccino...........R$ $valorCapuccino
-            "Latte...............R$ $valorLatte
-            "0....................Voltar
+            1 - Expresso............R$ $valorExpresso
+            2 - Capuccino...........R$ $valorCapuccino
+            3 - Latte...............R$ $valorLatte
+            0 - Voltar
             """.trimIndent()
 
 val superior = """
-        =====================Comanda E-padoca======================
-        ===========================================================
-        item.......Produto..........Qtd.......Valor...........Total
-        ===========================================================
+        ======================Comanda E-padoca=======================
+        =============================================================
+        item.......Produto..........Qtd.......Valor.............Total
+        =============================================================
         """.trimIndent()
 
 val df = DecimalFormat("#,##0.00")
@@ -156,10 +157,10 @@ fun main() {
             println(linhaItem)
         }
 
-        println(""" 
-        ===========================================================
-        Total ===========================================> R$ ${df.format(valorTotal)}
-        =====================VOLTE SEMPRE ^-^======================
+        println("""
+        =============================================================
+        Total =============================================> R$ ${df.format(valorTotal)}
+        ======================VOLTE SEMPRE ^-^=======================
         """.trimIndent())
     }
 }
