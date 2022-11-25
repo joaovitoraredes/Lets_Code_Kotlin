@@ -188,6 +188,12 @@ fun ePadoca(){
             }
         }
     }while (categoria != 0)
+
+    println("Você possui algum cupom de desconto?")
+    when(readln().uppercase()){
+        "S" -> valorTotal = cupomDeDesconto(valorTotal)
+    }
+
 }
 fun selecionaQuantidadeDoProdutoECalculoDoValor(
     produto: Pair<String,Double>
@@ -229,3 +235,17 @@ fun selecionaProduto(
     } while (selecaoDoTipoDoProduto != 0)
 }
 
+fun cupomDeDesconto(
+    valorTotal: Double
+): Double {
+    var valor = valorTotal
+    println("Qual o seu cupom?")
+    when(readln()){
+        "5PADOCA" -> valor -= (valor * 0.05)
+        "10PADOCA" -> valor -= (valor * 0.1)
+        "50OFF" -> valor -= (valor * 0.5)
+        else ->
+            println("Cupom inválido!!")
+    }
+    return valor
+}
